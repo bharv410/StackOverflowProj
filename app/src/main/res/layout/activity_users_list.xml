@@ -8,10 +8,8 @@
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/usersListRecyclerView"
-        android:layout_width="365dp"
-        android:layout_height="495dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="8dp"/>
+
 </android.support.constraint.ConstraintLayout>

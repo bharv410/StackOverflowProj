@@ -47,11 +47,6 @@ public class UsersListActivity extends AppCompatActivity implements UsersListVie
     public void displayUsersList(UserListResponse userListResponse) {
         List<User> userList = userListResponse.getItems();
 
-        int i=3;
-        for(User user : userList){
-            Log.e("benmark", String.valueOf(i));
-            i++;
-        }
         RecyclerView rv= (RecyclerView) findViewById(R.id.usersListRecyclerView);
         rv.setLayoutManager(new LinearLayoutManager(this));
         rv.setAdapter(new UsersListAdapter(this, userList));
