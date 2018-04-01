@@ -40,6 +40,9 @@ public class UsersListAdapter extends RecyclerView.Adapter<UserListItemViewHolde
 
         holder.nameTxt.setText(user.getDisplay_name());
         holder.goldBadgeTxt.setText(user.getBadgeCount().getGold());
+        holder.silverBadgeTxt.setText(user.getBadgeCount().getSilver());
+        holder.bronzeBadgeTxt.setText(user.getBadgeCount().getBronze());
+        holder.locationTxt.setText(user.getLocation());
 
         Picasso.get()
                 .load(user.getProfile_image())
