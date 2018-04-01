@@ -57,7 +57,7 @@
                 android:layout_alignParentBottom="true"
                 android:layout_centerHorizontal="true"
                 android:drawableLeft="@drawable/silver_badge_icon"
-                android:text="0"
+                android:text="   "
                 android:textSize="18sp" />
 
 
@@ -67,7 +67,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="30dp"
                 android:textSize="18sp"
-                android:text="0"
+                android:text="   "
                 android:layout_alignParentBottom="true"
                 android:drawableLeft="@drawable/gold_badge_icon"
                 android:layout_toLeftOf="@id/silverBadgeTxt"
@@ -80,7 +80,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="30dp"
                 android:textSize="18sp"
-                android:text="0"
+                android:text="   "
                 android:layout_alignParentBottom="true"
                 android:layout_toRightOf="@id/silverBadgeTxt"
                 android:drawableLeft="@drawable/bronze_badge_icon"

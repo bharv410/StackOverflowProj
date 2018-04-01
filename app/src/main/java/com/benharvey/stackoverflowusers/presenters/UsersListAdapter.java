@@ -42,7 +42,13 @@ public class UsersListAdapter extends RecyclerView.Adapter<UserListItemViewHolde
         holder.goldBadgeTxt.setText(user.getBadgeCount().getGold());
         holder.silverBadgeTxt.setText(user.getBadgeCount().getSilver());
         holder.bronzeBadgeTxt.setText(user.getBadgeCount().getBronze());
-        holder.locationTxt.setText(user.getLocation());
+        
+        //some locations are null
+        if(user.getLocation() != null) {
+            holder.locationTxt.setText(user.getLocation());
+        }else{
+            holder.locationTxt.setText("Unknown Location");
+        }
 
         Picasso.get()
                 .load(user.getProfile_image())
