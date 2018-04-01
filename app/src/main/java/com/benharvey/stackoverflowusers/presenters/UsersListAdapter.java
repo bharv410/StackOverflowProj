@@ -42,7 +42,7 @@ public class UsersListAdapter extends RecyclerView.Adapter<UserListItemViewHolde
         holder.goldBadgeTxt.setText(user.getBadgeCount().getGold());
         holder.silverBadgeTxt.setText(user.getBadgeCount().getSilver());
         holder.bronzeBadgeTxt.setText(user.getBadgeCount().getBronze());
-        
+
         //some locations are null
         if(user.getLocation() != null) {
             holder.locationTxt.setText(user.getLocation());

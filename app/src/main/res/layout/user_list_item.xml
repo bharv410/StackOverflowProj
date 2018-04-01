@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v7.widget.CardView
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="@dimen/user_list_item_height"
     android:layout_margin="@dimen/regular_item_margin"
@@ -9,83 +11,103 @@
     card_view:cardCornerRadius="@dimen/cardview_corner_radius"
     card_view:cardElevation="@dimen/cardview_elevation">
 
-    <RelativeLayout
+    <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_margin="@dimen/regular_item_margin">
 
-        <ImageView
-            android:id="@+id/userListItemGravatar"
+        <android.support.v7.widget.CardView
+            android:id="@+id/userListItemGravatarCardView"
             android:layout_width="@dimen/user_gravatar_height"
             android:layout_height="@dimen/user_gravatar_height"
+            app:cardCornerRadius="5dp"
             android:layout_margin="@dimen/regular_item_margin"
-            />
+            android:elevation="10dp">
 
-        <RelativeLayout
-            android:id="@+id/userInfoRelativeLayout"
+            <ImageView
+                android:id="@+id/userListItemGravatar"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/cardview_light_background"
+                android:scaleType="centerCrop"
+                />
+        </android.support.v7.widget.CardView>
+
+
+        <TextView
+            android:id="@+id/nameTxt"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_toRightOf="@id/userListItemGravatar"
-            android:layout_marginBottom="20dp">
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/regular_item_margin"
+            android:gravity="center"
+            android:text="Name"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="@color/colorAccent"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@+id/userListItemGravatarCardView"
+            app:layout_constraintTop_toTopOf="parent" />
 
-            <TextView
-                android:id="@+id/nameTxt"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="@dimen/regular_item_padding"
-                android:text="Name"
-                android:gravity="center"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:textColor="@color/colorAccent"
-                android:textStyle="bold"/>
+        <android.support.constraint.Guideline
+            android:id="@+id/firstThirdGuideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.33" />
 
+        <android.support.constraint.Guideline
+            android:id="@+id/secondThirdGuideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.66"/>
 
-            <!--Put silver badge centered first so it can be used as reference-->
-            <TextView
-                android:id="@+id/locationTxt"
-                android:textSize="15sp"
-                android:layout_width="match_parent"
-                android:gravity="center_horizontal"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/nameTxt"
-                android:layout_marginBottom="@dimen/regular_item_margin"
-                />
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/goldBadgeTxt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:textSize="16sp"
+            android:drawableStart="@drawable/gold_badge_icon"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/firstThirdGuideline"
+            app:layout_constraintStart_toStartOf="parent" />
 
-            <TextView
-                android:id="@+id/silverBadgeTxt"
-                android:layout_width="wrap_content"
-                android:layout_height="30dp"
-                android:layout_alignParentBottom="true"
-                android:layout_centerHorizontal="true"
-                android:drawableLeft="@drawable/silver_badge_icon"
-                android:text="   "
-                android:textSize="18sp" />
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/silverBadgeTxt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:textSize="16sp"
+            android:drawableStart="@drawable/silver_badge_icon"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/secondThirdGuideline"
+            app:layout_constraintStart_toStartOf="@+id/firstThirdGuideline" />
 
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/bronzeBadgeTxt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:textSize="16sp"
+            android:drawableStart="@drawable/bronze_badge_icon"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/secondThirdGuideline" />
 
-            <!--Put gold badge to left of silver-->
-            <TextView
-                android:id="@+id/goldBadgeTxt"
-                android:layout_width="wrap_content"
-                android:layout_height="30dp"
-                android:textSize="18sp"
-                android:text="   "
-                android:layout_alignParentBottom="true"
-                android:drawableLeft="@drawable/gold_badge_icon"
-                android:layout_toLeftOf="@id/silverBadgeTxt"
-                />
+        <TextView
+            android:id="@+id/locationTxt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:textSize="15sp"
+            app:layout_constraintStart_toStartOf="@+id/nameTxt"
+            app:layout_constraintTop_toBottomOf="@+id/nameTxt"/>
 
-
-            <!--Put bronze badge to right of silver-->
-            <TextView
-                android:id="@+id/bronzeBadgeTxt"
-                android:layout_width="wrap_content"
-                android:layout_height="30dp"
-                android:textSize="18sp"
-                android:text="   "
-                android:layout_alignParentBottom="true"
-                android:layout_toRightOf="@id/silverBadgeTxt"
-                android:drawableLeft="@drawable/bronze_badge_icon"
-                />
-
-        </RelativeLayout>
-    </RelativeLayout>
+    </android.support.constraint.ConstraintLayout>
 </android.support.v7.widget.CardView>

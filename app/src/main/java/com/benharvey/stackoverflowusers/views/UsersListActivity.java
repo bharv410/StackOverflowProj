@@ -56,6 +56,7 @@ public class UsersListActivity extends AppCompatActivity implements UsersListVie
         rv.scheduleLayoutAnimation();
         rv.invalidate();
 
+        //hide progress
         ProgressBar progressBar = (ProgressBar)findViewById(R.id.loadUsersProgressBar);
         progressBar.setVisibility(View.GONE);
     }

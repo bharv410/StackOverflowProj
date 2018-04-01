@@ -3,7 +3,7 @@
     <dimen name="regular_item_margin">10dp</dimen>
     <dimen name="regular_item_padding">10dp</dimen>
     <dimen name="user_list_item_height">140dp</dimen>
-    <dimen name="user_gravatar_height">120dp</dimen>
+    <dimen name="user_gravatar_height">64dp</dimen>
 
     //Card View Dimensions
     <dimen name="cardview_corner_radius">5dp</dimen>
