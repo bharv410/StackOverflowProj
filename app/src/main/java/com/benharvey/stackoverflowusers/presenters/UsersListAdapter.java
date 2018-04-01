@@ -30,20 +30,21 @@ public class UsersListAdapter extends RecyclerView.Adapter<UserListItemViewHolde
     //VIEW ITEM
     @Override
     public UserListItemViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View v= LayoutInflater.from(c).inflate(R.layout.user_list_item,parent,false);
+        View v = LayoutInflater.from(c).inflate(R.layout.user_list_item, parent, false);
         return new UserListItemViewHolder(v);
     }
 
     @Override
     public void onBindViewHolder(UserListItemViewHolder holder, int position) {
-        //CURRENT USER
-        User user =users.get(position);
+        User user = users.get(position);
 
-        //BIND DATA
         holder.nameTxt.setText(user.getDisplay_name());
-        holder.propellantTxt.setText(user.getAge());
+        holder.goldBadgeTxt.setText(user.getBadgeCount().getGold());
 
-        Picasso.get().load(user.getProfile_image()).into(holder.img);
+        Picasso.get()
+                .load(user.getProfile_image())
+                .placeholder(R.drawable.progress_animation)
+                .into(holder.img);
     }
 
     @Override

@@ -9,6 +9,8 @@ public class User {
 
     private String account_id;
 
+    private BadgeCount badge_counts;
+
     private String location;
 
     private String accept_rate;
@@ -243,6 +245,11 @@ public class User {
     public void setReputation_change_quarter (String reputation_change_quarter)
     {
         this.reputation_change_quarter = reputation_change_quarter;
+    }
+
+    public BadgeCount getBadgeCount ()
+    {
+        return badge_counts;
     }
 
     @Override

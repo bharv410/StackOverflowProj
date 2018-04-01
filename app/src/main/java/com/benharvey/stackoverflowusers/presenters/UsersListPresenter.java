@@ -1,16 +1,13 @@
 package com.benharvey.stackoverflowusers.presenters;
 
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-import android.widget.Toast;
 
-import com.benharvey.stackoverflowusers.models.GetUsersService;
+import com.benharvey.stackoverflowusers.networking.GetUsersService;
 import com.benharvey.stackoverflowusers.models.User;
 import com.benharvey.stackoverflowusers.models.UserListResponse;
+import com.benharvey.stackoverflowusers.networking.ServiceGenerator;
 import com.benharvey.stackoverflowusers.views.UsersListView;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,56 +22,48 @@ import retrofit2.converter.gson.GsonConverterFactory;
  */
 
 public class UsersListPresenter implements Presenter{
+    private final String TAG = getClass().getName();
 
     private UsersListView usersListView;
-//    private List<User> userList;
-
+    private List<User> userList;
 
     public UsersListPresenter(UsersListView usersListView){
         this.usersListView = usersListView;
-        //userList = new ArrayList<>();
+        userList = new ArrayList<>();
     }
+
     @Override
     public void onCreate() {
         refreshUserList();
     }
 
     private void refreshUserList(){
-        //userList = new ArrayList<>();
+        GetUsersService getUsersService = ServiceGenerator.createService(GetUsersService.class);
 
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("https://api.stackexchange.com/2.2/")
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-
-        GetUsersService getUsersService = retrofit.create(GetUsersService.class);
-
-        Call<UserListResponse> call = getUsersService.listUsers();
-        call.enqueue(new Callback<UserListResponse>() {
+        getUsersService.listUsers().enqueue(new Callback<UserListResponse>() {
             @Override
             public void onResponse(Call<UserListResponse> call, Response<UserListResponse> response) {
-                usersListView.displayUsersList(response.body());
+                userList = response.body().getItems();
+                usersListView.displayUsersList(userList);
             }
 
             @Override
             public void onFailure(Call<UserListResponse> call, Throwable t) {
-                Log.e("benmark", "failure getting users" + t.getMessage());
+                Log.e(TAG, "failure getting users" + t.getMessage());
+                usersListView.showRetrievalError();
             }
         });
     }
 
     @Override
     public void onPause() {
-
     }
 
     @Override
     public void onResume() {
-
     }
 
     @Override
     public void onDestroy() {
-
     }
 }

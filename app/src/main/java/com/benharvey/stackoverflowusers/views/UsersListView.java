@@ -12,5 +12,6 @@ import java.util.List;
  */
 
 public interface UsersListView {
-    void displayUsersList(UserListResponse userList);
+    void displayUsersList(List<User> userList);
+    void showRetrievalError();
 }

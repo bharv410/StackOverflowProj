@@ -1,4 +1,6 @@
-package com.benharvey.stackoverflowusers.models;
+package com.benharvey.stackoverflowusers.networking;
+
+import com.benharvey.stackoverflowusers.models.UserListResponse;
 
 import java.util.List;
 
