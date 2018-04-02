@@ -64,6 +64,7 @@ public class UsersListPresenter implements Presenter{
         if(userListFromDisk.size() > 0){
             Log.e("benmark", "OMG IS GREATER THAN 0");
             usersListView.displayUsersList(userListFromDisk);
+            usersListView.displayOfflineModeSnackbar();
         }else{
             Log.e("benmark", "awww man");
             usersListView.showRetrievalError();

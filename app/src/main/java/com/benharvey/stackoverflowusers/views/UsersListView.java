@@ -15,5 +15,6 @@ import java.util.List;
 public interface UsersListView {
     void displayUsersList(List<User> userList);
     void showRetrievalError();
+    void displayOfflineModeSnackbar();
     Context getContext();
 }

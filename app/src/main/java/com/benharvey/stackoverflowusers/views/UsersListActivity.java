@@ -2,6 +2,7 @@ package com.benharvey.stackoverflowusers.views;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -62,6 +63,14 @@ public class UsersListActivity extends AppCompatActivity implements UsersListVie
         //hide progress
         ProgressBar progressBar = (ProgressBar)findViewById(R.id.loadUsersProgressBar);
         progressBar.setVisibility(View.GONE);
+    }
+
+    @Override
+    public void displayOfflineModeSnackbar() {
+        Snackbar snackbar = Snackbar
+                .make(findViewById(R.id.mainLayout), "OFFLINE: Viewing saved data", Snackbar.LENGTH_LONG);
+
+        snackbar.show();
     }
 
     @Override
