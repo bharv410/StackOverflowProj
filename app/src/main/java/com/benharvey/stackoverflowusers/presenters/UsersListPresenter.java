@@ -68,7 +68,7 @@ public class UsersListPresenter implements Presenter{
     private void attemptToReadFromDisk(){
         UserDatabaseAdapter userDatabaseAdapter = new UserDatabaseAdapter(usersListView.getContext());
         userDatabaseAdapter = userDatabaseAdapter.open();
-        List<User> userListFromDisk = userDatabaseAdapter.getAllUsers();
+        List<User> userListFromDisk = userDatabaseAdapter.getFirstPageOfUsers();
         userDatabaseAdapter.close();
 
         if(userListFromDisk.size() > 0){

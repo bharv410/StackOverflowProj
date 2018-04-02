@@ -13,7 +13,7 @@ import com.benharvey.stackoverflowusers.R;
 
 public class UserListItemViewHolder extends RecyclerView.ViewHolder {
 
-    public TextView nameTxt, goldBadgeTxt, silverBadgeTxt, bronzeBadgeTxt, locationTxt, lastActiveTxt;
+    public TextView nameTxt, goldBadgeTxt, silverBadgeTxt, bronzeBadgeTxt, locationTxt, userAgeTxt;
     public ImageView img;
 
     public UserListItemViewHolder(View itemView) {
@@ -24,7 +24,7 @@ public class UserListItemViewHolder extends RecyclerView.ViewHolder {
         silverBadgeTxt = itemView.findViewById(R.id.silverBadgeTxt);
         bronzeBadgeTxt = itemView.findViewById(R.id.bronzeBadgeTxt);
         locationTxt = itemView.findViewById(R.id.locationTxt);
-        lastActiveTxt = itemView.findViewById(R.id.lastActiveTxt);
+        userAgeTxt = itemView.findViewById(R.id.userAgeTxt);
         img = itemView.findViewById(R.id.userListItemGravatar);
     }
 }

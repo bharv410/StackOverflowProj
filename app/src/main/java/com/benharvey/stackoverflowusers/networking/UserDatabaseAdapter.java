@@ -84,7 +84,7 @@ public class UserDatabaseAdapter {
         return true;
     }
 
-    public List<User> getAllUsers() {
+    public List<User> getFirstPageOfUsers() {
         List<User> users = new ArrayList<User>();
 
         String query = "SELECT * FROM " + "USER";
@@ -103,6 +103,7 @@ public class UserDatabaseAdapter {
                 nextUser.setAge(cursor.getString(6));
                 nextUser.setLocation(cursor.getString(7));
 
+                if(users.size()<30)
                 users.add(nextUser);
             } while (cursor.moveToNext());
         }

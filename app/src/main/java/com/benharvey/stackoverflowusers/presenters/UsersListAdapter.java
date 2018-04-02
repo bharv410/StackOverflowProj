@@ -2,12 +2,10 @@ package com.benharvey.stackoverflowusers.presenters;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
-import android.text.format.DateUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.benharvey.stackoverflowusers.R;
 import com.benharvey.stackoverflowusers.models.User;
@@ -16,8 +14,6 @@ import com.squareup.picasso.Callback;
 import com.squareup.picasso.NetworkPolicy;
 import com.squareup.picasso.Picasso;
 
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -53,9 +49,9 @@ public class UsersListAdapter extends RecyclerView.Adapter<UserListItemViewHolde
 
         //some ages are null
         if(user.getAge() != null) {
-            holder.lastActiveTxt.setText(c.getString(R.string.user_age_text, user.getAge()));
+            holder.userAgeTxt.setText(c.getString(R.string.user_age_text, user.getAge()));
         }else{
-            holder.lastActiveTxt.setText(c.getString(R.string.user_age_text_not_available));
+            holder.userAgeTxt.setText(c.getString(R.string.user_age_text_not_available));
         }
 
         //some locations are null
