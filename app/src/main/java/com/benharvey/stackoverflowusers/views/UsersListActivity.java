@@ -78,9 +78,14 @@ public class UsersListActivity extends AppCompatActivity implements UsersListVie
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.dismiss();
-                        usersListPresenter.onCreate();
                     }
                 });
+        alertDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
+            @Override
+            public void onDismiss(DialogInterface dialogInterface) {
+                usersListPresenter.onCreate();
+            }
+        });
         alertDialog.show();
     }
 
