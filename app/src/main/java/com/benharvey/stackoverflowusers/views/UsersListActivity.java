@@ -1,6 +1,8 @@
 package com.benharvey.stackoverflowusers.views;
 
 import android.content.Context;
+import android.content.DialogInterface;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -64,7 +66,18 @@ public class UsersListActivity extends AppCompatActivity implements UsersListVie
 
     @Override
     public void showRetrievalError() {
-        Toast.makeText(this, "There was an error loading users", Toast.LENGTH_SHORT).show();
+        AlertDialog alertDialog = new AlertDialog.Builder(this).create();
+        alertDialog.setTitle("Offline");
+        alertDialog.setMessage("Unable to retrieve user list.\n\nOpen the app while having internet access atleast one time and then we will save everything for offline usage. You have never" +
+                " opened the app before while having an internet connection.\n\nPlease launch the app with internet at least once. ");
+        alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                        usersListPresenter.onCreate();
+                    }
+                });
+        alertDialog.show();
     }
 
     @Override

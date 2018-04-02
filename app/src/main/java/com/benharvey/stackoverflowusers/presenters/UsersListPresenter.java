@@ -66,7 +66,7 @@ public class UsersListPresenter implements Presenter{
             usersListView.displayUsersList(userListFromDisk);
         }else{
             Log.e("benmark", "awww man");
-
+            usersListView.showRetrievalError();
         }
     }
 

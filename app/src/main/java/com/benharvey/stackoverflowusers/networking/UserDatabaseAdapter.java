@@ -60,7 +60,6 @@ public class UserDatabaseAdapter {
             db = dbHelper.getWritableDatabase();
             long result=db.insert("USER", null, newValues);
             System.out.print(result);
-            Toast.makeText(context, "User Info Saved", Toast.LENGTH_LONG).show();
         }catch(Exception ex) {
             System.out.println("Exceptions " +ex);
             Log.e("Note", "One row entered");
