@@ -1,7 +1,10 @@
 package com.benharvey.stackoverflowusers.presenters;
 
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.util.Log;
 
+import com.benharvey.stackoverflowusers.R;
 import com.benharvey.stackoverflowusers.networking.GetUsersService;
 import com.benharvey.stackoverflowusers.models.User;
 import com.benharvey.stackoverflowusers.models.UserListResponse;
@@ -41,17 +44,22 @@ public class UsersListPresenter implements Presenter{
 
         getUsersService.listUsers().enqueue(new Callback<UserListResponse>() {
             @Override
-            public void onResponse(Call<UserListResponse> call, Response<UserListResponse> response) {
-                List<User> userList = response.body().getItems();
-                usersListView.displayUsersList(userList);
-                saveUsersToLocalDB(userList);
+            public void onResponse(@NonNull Call<UserListResponse> call, @NonNull Response<UserListResponse> response) {
+                if(response.isSuccessful()
+                        && response.body().hasItems()) {
+                    //IF SUCCESSFUL then render list and save to DB (updates duplicate entrys)
+                    List<User> userList = response.body().getItems();
+                    usersListView.displayUsersList(userList);
+                    saveUsersToLocalDB(userList);
+                }else{
+                    Log.e(TAG, usersListView.getContext().getString(R.string.stack_overflow_api_error));
+                }
             }
 
             @Override
             public void onFailure(Call<UserListResponse> call, Throwable t) {
-                Log.e(TAG, "failure getting users" + t.getMessage());
-                //usersListView.showRetrievalError();
-                Log.e("benmark", "FAILED READ FROM DISK");
+                //Failed to read from network. Attempt to read from disk
+                Log.e(TAG, t.getLocalizedMessage());
                 attemptToReadFromDisk();
             }
         });
@@ -61,12 +69,12 @@ public class UsersListPresenter implements Presenter{
         UserDatabaseAdapter userDatabaseAdapter = new UserDatabaseAdapter(usersListView.getContext());
         userDatabaseAdapter = userDatabaseAdapter.open();
         List<User> userListFromDisk = userDatabaseAdapter.getAllUsers();
+        userDatabaseAdapter.close();
+
         if(userListFromDisk.size() > 0){
-            Log.e("benmark", "OMG IS GREATER THAN 0");
             usersListView.displayUsersList(userListFromDisk);
             usersListView.displayOfflineModeSnackbar();
         }else{
-            Log.e("benmark", "awww man");
             usersListView.showRetrievalError();
         }
     }
@@ -75,7 +83,7 @@ public class UsersListPresenter implements Presenter{
         UserDatabaseAdapter userDatabaseAdapter = new UserDatabaseAdapter(usersListView.getContext());
         userDatabaseAdapter = userDatabaseAdapter.open();
         for(User user : userList){
-            String recieveOk = userDatabaseAdapter.
+            boolean insertSuccesful = userDatabaseAdapter.
                     insertEntry(user.getDisplay_name(),
                             user.getBadgeCount().getGold(),
                             user.getBadgeCount().getSilver(),
@@ -83,10 +91,10 @@ public class UsersListPresenter implements Presenter{
                             user.getProfile_image(),
                             user.getAge(),
                             user.getLocation());
-            Log.e("benmark", recieveOk);
         }
         userDatabaseAdapter.close();
     }
+
     @Override
     public void onPause() {
     }

@@ -1,3 +1,12 @@
 <resources>
-    <string name="app_name">StackOverflowUsers</string>
+    <string name="app_name">StackOverflow User List</string>
+    <string name="offline_snackbar_message">OFFLINE: Viewing saved data</string>
+    <string name="dialog_ok_text">Okay</string>
+    <string name="offline_dialog_title">Offline</string>
+    <string name="offline_dialog_message">Unable to retrieve user list.\n\nOpen the app while having internet access atleast one time and then we will save everything for offline usage. You have never" +
+                " opened the app before while having an internet connection.\n\nPlease launch the app with internet at least once.</string>
+    <string name="stack_overflow_api_error">Error retrieving user list. Stack Overflow didn\'t provide the users list like it normally does</string>
+    <string name="user_age_text">Age: %1$s</string>
+    <string name="user_age_text_not_available">Age: N/A</string>
+    <string name="user_location_not_available">Unknown Location</string>
 </resources>

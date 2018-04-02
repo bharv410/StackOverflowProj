@@ -11,14 +11,12 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         super(context, name, factory, version);
     }
 
-    // Called when no database exists in disk and the helper class needs
-    // to create a new one.
     @Override
     public void onCreate(SQLiteDatabase _db) {
         try {
             _db.execSQL(UserDatabaseAdapter.DATABASE_CREATE);
         } catch (Exception er) {
-            Log.e("Error", "exceptioin: " + er.getLocalizedMessage());
+            Log.e("Error", "exception: " + er.getLocalizedMessage());
         }
     }
 

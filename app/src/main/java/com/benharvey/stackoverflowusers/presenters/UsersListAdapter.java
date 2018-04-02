@@ -34,7 +34,6 @@ public class UsersListAdapter extends RecyclerView.Adapter<UserListItemViewHolde
         this.users = users;
     }
 
-    //VIEW ITEM
     @Override
     public UserListItemViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(c).inflate(R.layout.user_list_item, parent, false);
@@ -52,25 +51,26 @@ public class UsersListAdapter extends RecyclerView.Adapter<UserListItemViewHolde
 
         loadProfileImage(holder, user);
 
+        //some ages are null
         if(user.getAge() != null) {
-            holder.lastActiveTxt.setText("Age: " + user.getAge());
+            holder.lastActiveTxt.setText(c.getString(R.string.user_age_text, user.getAge()));
         }else{
-            holder.lastActiveTxt.setText("Age: " + "N/A");
+            holder.lastActiveTxt.setText(c.getString(R.string.user_age_text_not_available));
         }
 
         //some locations are null
         if(user.getLocation() != null) {
             holder.locationTxt.setText(user.getLocation());
         }else{
-            holder.locationTxt.setText("Unknown Location");
+            holder.locationTxt.setText(c.getString(R.string.user_location_not_available));
         }
-
     }
 
     private void loadProfileImage(final UserListItemViewHolder holder, final User user){
         Picasso.with(c)
                 .load(user.getProfile_image())
                 .networkPolicy(NetworkPolicy.OFFLINE)
+                .placeholder(R.drawable.progress_animation)
                 .into(holder.img, new Callback() {
                     @Override
                     public void onSuccess() {

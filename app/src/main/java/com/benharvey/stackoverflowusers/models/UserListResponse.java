@@ -16,4 +16,8 @@ public class UserListResponse {
     public List<User> getItems() {
         return items;
     }
+
+    public boolean hasItems(){
+        return (items != null) && items.size()>0;
+    }
 }

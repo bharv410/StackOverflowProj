@@ -19,12 +19,12 @@ public class UserListItemViewHolder extends RecyclerView.ViewHolder {
     public UserListItemViewHolder(View itemView) {
         super(itemView);
 
-        nameTxt = (TextView) itemView.findViewById(R.id.nameTxt);
-        goldBadgeTxt = (TextView) itemView.findViewById(R.id.goldBadgeTxt);
-        silverBadgeTxt = (TextView) itemView.findViewById(R.id.silverBadgeTxt);
-        bronzeBadgeTxt = (TextView) itemView.findViewById(R.id.bronzeBadgeTxt);
-        locationTxt = (TextView) itemView.findViewById(R.id.locationTxt);
-        lastActiveTxt = (TextView) itemView.findViewById(R.id.lastActiveTxt);
-        img = (ImageView) itemView.findViewById(R.id.userListItemGravatar);
+        nameTxt = itemView.findViewById(R.id.nameTxt);
+        goldBadgeTxt = itemView.findViewById(R.id.goldBadgeTxt);
+        silverBadgeTxt = itemView.findViewById(R.id.silverBadgeTxt);
+        bronzeBadgeTxt = itemView.findViewById(R.id.bronzeBadgeTxt);
+        locationTxt = itemView.findViewById(R.id.locationTxt);
+        lastActiveTxt = itemView.findViewById(R.id.lastActiveTxt);
+        img = itemView.findViewById(R.id.userListItemGravatar);
     }
 }

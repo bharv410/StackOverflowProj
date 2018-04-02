@@ -12,7 +12,7 @@ public class BadgeCount {
 
     private String gold;
 
-    public BadgeCount(String gold, String silver, String bronze){
+    BadgeCount(String gold, String silver, String bronze){
         this.gold = gold;
         this.silver = silver;
         this.bronze = bronze;
@@ -36,7 +36,7 @@ public class BadgeCount {
     @Override
     public String toString()
     {
-        return "ClassPojo [bronze = "+bronze+", silver = "+silver+", gold = "+gold+"]";
+        return "BadgeCount [bronze = "+bronze+", silver = "+silver+", gold = "+gold+"]";
     }
 
 }

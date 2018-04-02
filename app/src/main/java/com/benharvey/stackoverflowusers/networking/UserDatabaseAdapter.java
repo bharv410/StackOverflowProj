@@ -14,19 +14,35 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class UserDatabaseAdapter {
-    static final String DATABASE_NAME = "database.db";
-    String ok="OK";
-    static final int DATABASE_VERSION = 1;
-    static final String DATABASE_CREATE = "create table USER( ID integer primary key autoincrement,NAME  text,GOLD  text,SILVER  text," +
-            "BRONZE  text,GRAVATAR  text,AGE  text,LOCATION  text); ";
+    private static final String DATABASE_NAME = "database.db";
+    private static final int DATABASE_VERSION = 1;
 
-    public static SQLiteDatabase db;
+    private static final String TABLE_NAME = "USER";
+    private static final String NAME_COLUMN = "NAME";
+    private static final String GOLD_COLUMN = "GOLD";
+    private static final String SILVER_COLUMN = "SILVER";
+    private static final String BRONZE_COLUMN = "BRONZE";
+    private static final String GRAVATAR_COLUMN = "GRAVATAR";
+    private static final String AGE_COLUMN = "AGE";
+    private static final String LOCATION_COLUMN = "LOCATION";
+
+    static final String DATABASE_CREATE = "create table "
+            + TABLE_NAME + "( ID integer primary key autoincrement,"
+            + NAME_COLUMN + "  text,"
+            + GOLD_COLUMN + "  text,"
+            + SILVER_COLUMN + "  text,"
+            + BRONZE_COLUMN + "  text,"
+            + GRAVATAR_COLUMN + "  text,"
+            + AGE_COLUMN + "  text,"
+            + LOCATION_COLUMN + "  text); ";
+
+    private static SQLiteDatabase db;
     private final Context context;
     private static DataBaseHelper dbHelper;
 
-    public  UserDatabaseAdapter(Context _context)
+    public  UserDatabaseAdapter(Context c)
     {
-        context = _context;
+        context = c;
         dbHelper = new DataBaseHelper(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
     public  UserDatabaseAdapter open() throws SQLException
@@ -42,71 +58,41 @@ public class UserDatabaseAdapter {
     {
         return db;
     }
+
     // method to insert a record in Table
-    public String insertEntry(String name,String gold,String silver,String bronze, String gravatar, String age, String loc)
+    public boolean insertEntry(String name,String gold,String silver,String bronze, String gravatar, String age, String loc)
     {
         try {
             ContentValues newValues = new ContentValues();
             // Assign values for each column.
-            newValues.put("NAME", name);
-            newValues.put("GOLD", gold);
-            newValues.put("SILVER", silver);
-            newValues.put("BRONZE", bronze);
-            newValues.put("GRAVATAR", gravatar);
-            newValues.put("AGE", age);
-            newValues.put("LOCATION", loc);
+            newValues.put(NAME_COLUMN, name);
+            newValues.put(GOLD_COLUMN, gold);
+            newValues.put(SILVER_COLUMN, silver);
+            newValues.put(BRONZE_COLUMN, bronze);
+            newValues.put(GRAVATAR_COLUMN, gravatar);
+            newValues.put(AGE_COLUMN, age);
+            newValues.put(LOCATION_COLUMN, loc);
 
             // Insert the row into your table AND UPDATE DUPLICATES
             db = dbHelper.getWritableDatabase();
-            long result=db.insertWithOnConflict("USER", null, newValues, SQLiteDatabase.CONFLICT_REPLACE);
+            long result=db.insertWithOnConflict(TABLE_NAME, null, newValues, SQLiteDatabase.CONFLICT_REPLACE);
             System.out.print(result);
         }catch(Exception ex) {
-            System.out.println("Exceptions " +ex);
-            Log.e("Note", "One row entered");
+            Log.e("Database", "One row had an error while inserting");
+            return false;
         }
-        return ok;
-    }
-    // method to delete a Record of UserName
-    public int deleteEntry(String UserName)
-    {
-        String where="NAME=?";
-        int numberOFEntriesDeleted= db.delete("LOGIN", where, new String[]{UserName}) ;
-        Toast.makeText(context, "Number fo Entry Deleted Successfully : "+numberOFEntriesDeleted, Toast.LENGTH_LONG).show();
-        return numberOFEntriesDeleted;
-    }
-    // method to get the password  of userName
-    public User getSingleEntry(String userName)
-    {
-        db=dbHelper.getReadableDatabase();
-        Cursor cursor=db.query("USER", null, "NAME=?", new String[]{userName}, null, null, null);
-        if(cursor.getCount()<1) // UserName Not Exist
-            return null;
-        cursor.moveToFirst();
-
-        User returnUser = new User();
-        returnUser.setDisplay_name(cursor.getString(cursor.getColumnIndex("NAME")));
-        returnUser.setBadge_counts(cursor.getString(cursor.getColumnIndex("GOLD")),
-                cursor.getString(cursor.getColumnIndex("SILVER")),
-                        cursor.getString(cursor.getColumnIndex("BRONZE")));
-        returnUser.setProfile_image(cursor.getString(cursor.getColumnIndex("GRAVATAR")));
-        returnUser.setAge(cursor.getString(cursor.getColumnIndex("AGE")));
-        returnUser.setLocation(cursor.getString(cursor.getColumnIndex("LOCATION")));
-
-        return returnUser;
+        return true;
     }
 
     public List<User> getAllUsers() {
         List<User> users = new ArrayList<User>();
 
-        //bygg query
         String query = "SELECT * FROM " + "USER";
 
-        //fa referens
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         Cursor cursor = db.rawQuery(query, null);
 
-        //iterera och bygg och lagg till
-        User nextUser = null;
+        User nextUser;
         if (cursor.moveToFirst()) {
             do {
                 nextUser = new User();
@@ -117,7 +103,6 @@ public class UserDatabaseAdapter {
                 nextUser.setAge(cursor.getString(6));
                 nextUser.setLocation(cursor.getString(7));
 
-                //lagg till
                 users.add(nextUser);
             } while (cursor.moveToNext());
         }
