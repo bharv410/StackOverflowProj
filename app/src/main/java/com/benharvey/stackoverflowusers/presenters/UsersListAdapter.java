@@ -54,8 +54,9 @@ public class UsersListAdapter extends RecyclerView.Adapter<UserListItemViewHolde
             holder.userAgeTxt.setText(c.getString(R.string.user_age_text_not_available));
         }
 
-        //some locations are null
-        if(user.getLocation() != null) {
+        //some locations are null or unparsable
+        if(user.getLocation() != null
+                && !user.getLocation().contains("#")) {
             holder.locationTxt.setText(user.getLocation());
         }else{
             holder.locationTxt.setText(c.getString(R.string.user_location_not_available));

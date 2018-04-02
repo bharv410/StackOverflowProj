@@ -32,15 +32,16 @@
         </android.support.v7.widget.CardView>
 
 
-        <TextView
+        <android.support.v7.widget.AppCompatTextView
             android:id="@+id/nameTxt"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="180dp"
+            android:layout_height="30dp"
             android:layout_marginStart="@dimen/regular_item_margin"
-            android:gravity="center"
+            android:gravity="left"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:textColor="@color/colorAccent"
             android:textStyle="bold"
+            app:autoSizeTextType="uniform"
             app:layout_constraintStart_toEndOf="@id/userListItemGravatarCardView"
             app:layout_constraintTop_toTopOf="parent" />
 
