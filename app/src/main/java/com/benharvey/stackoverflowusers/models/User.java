@@ -252,6 +252,9 @@ public class User {
         return badge_counts;
     }
 
+    public void setBadge_counts(String gold, String silver, String bronze){
+        this.badge_counts = new BadgeCount(gold, silver, bronze);
+    }
     @Override
     public String toString()
     {

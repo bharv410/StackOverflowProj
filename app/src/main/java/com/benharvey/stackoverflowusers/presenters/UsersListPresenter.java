@@ -6,6 +6,7 @@ import com.benharvey.stackoverflowusers.networking.GetUsersService;
 import com.benharvey.stackoverflowusers.models.User;
 import com.benharvey.stackoverflowusers.models.UserListResponse;
 import com.benharvey.stackoverflowusers.networking.ServiceGenerator;
+import com.benharvey.stackoverflowusers.networking.UserDatabaseAdapter;
 import com.benharvey.stackoverflowusers.views.UsersListView;
 
 import java.util.ArrayList;
@@ -25,11 +26,9 @@ public class UsersListPresenter implements Presenter{
     private final String TAG = getClass().getName();
 
     private UsersListView usersListView;
-    private List<User> userList;
 
     public UsersListPresenter(UsersListView usersListView){
         this.usersListView = usersListView;
-        userList = new ArrayList<>();
     }
 
     @Override
@@ -43,18 +42,50 @@ public class UsersListPresenter implements Presenter{
         getUsersService.listUsers().enqueue(new Callback<UserListResponse>() {
             @Override
             public void onResponse(Call<UserListResponse> call, Response<UserListResponse> response) {
-                userList = response.body().getItems();
+                List<User> userList = response.body().getItems();
                 usersListView.displayUsersList(userList);
+                saveUsersToLocalDB(userList);
             }
 
             @Override
             public void onFailure(Call<UserListResponse> call, Throwable t) {
                 Log.e(TAG, "failure getting users" + t.getMessage());
-                usersListView.showRetrievalError();
+                //usersListView.showRetrievalError();
+                Log.e("benmark", "FAILED READ FROM DISK");
+                attemptToReadFromDisk();
             }
         });
     }
 
+    private void attemptToReadFromDisk(){
+        UserDatabaseAdapter userDatabaseAdapter = new UserDatabaseAdapter(usersListView.getContext());
+        userDatabaseAdapter = userDatabaseAdapter.open();
+        List<User> userListFromDisk = userDatabaseAdapter.getAllUsers();
+        if(userListFromDisk.size() > 0){
+            Log.e("benmark", "OMG IS GREATER THAN 0");
+            usersListView.displayUsersList(userListFromDisk);
+        }else{
+            Log.e("benmark", "awww man");
+
+        }
+    }
+
+    private void saveUsersToLocalDB(List<User> userList){
+        UserDatabaseAdapter userDatabaseAdapter = new UserDatabaseAdapter(usersListView.getContext());
+        userDatabaseAdapter = userDatabaseAdapter.open();
+        for(User user : userList){
+            String recieveOk = userDatabaseAdapter.
+                    insertEntry(user.getDisplay_name(),
+                            user.getBadgeCount().getGold(),
+                            user.getBadgeCount().getSilver(),
+                            user.getBadgeCount().getBronze(),
+                            user.getProfile_image(),
+                            user.getAge(),
+                            user.getLocation());
+            Log.e("benmark", recieveOk);
+        }
+        userDatabaseAdapter.close();
+    }
     @Override
     public void onPause() {
     }

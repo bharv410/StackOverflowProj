@@ -1,5 +1,6 @@
 package com.benharvey.stackoverflowusers.views;
 
+import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 
 import com.benharvey.stackoverflowusers.models.User;
@@ -14,4 +15,5 @@ import java.util.List;
 public interface UsersListView {
     void displayUsersList(List<User> userList);
     void showRetrievalError();
+    Context getContext();
 }

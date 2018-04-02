@@ -12,6 +12,11 @@ public class BadgeCount {
 
     private String gold;
 
+    public BadgeCount(String gold, String silver, String bronze){
+        this.gold = gold;
+        this.silver = silver;
+        this.bronze = bronze;
+    }
     public String getBronze ()
     {
         return bronze;

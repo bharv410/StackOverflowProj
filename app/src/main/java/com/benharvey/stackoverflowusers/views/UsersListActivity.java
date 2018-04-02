@@ -1,5 +1,6 @@
 package com.benharvey.stackoverflowusers.views;
 
+import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -64,5 +65,10 @@ public class UsersListActivity extends AppCompatActivity implements UsersListVie
     @Override
     public void showRetrievalError() {
         Toast.makeText(this, "There was an error loading users", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public Context getContext() {
+        return this;
     }
 }
