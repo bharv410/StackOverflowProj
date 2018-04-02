@@ -56,9 +56,9 @@ public class UserDatabaseAdapter {
             newValues.put("AGE", age);
             newValues.put("LOCATION", loc);
 
-            // Insert the row into your table
+            // Insert the row into your table AND UPDATE DUPLICATES
             db = dbHelper.getWritableDatabase();
-            long result=db.insert("USER", null, newValues);
+            long result=db.insertWithOnConflict("USER", null, newValues, SQLiteDatabase.CONFLICT_REPLACE);
             System.out.print(result);
         }catch(Exception ex) {
             System.out.println("Exceptions " +ex);
