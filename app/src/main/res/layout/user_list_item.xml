@@ -106,8 +106,17 @@
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
             android:textSize="15sp"
+            android:text="efefe"
             app:layout_constraintStart_toStartOf="@+id/nameTxt"
             app:layout_constraintTop_toBottomOf="@+id/nameTxt"/>
+
+        <TextView
+            android:id="@+id/lastActiveTxt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Last Active: "
+            app:layout_constraintStart_toStartOf="@+id/locationTxt"
+            app:layout_constraintTop_toBottomOf="@+id/locationTxt" />
 
     </android.support.constraint.ConstraintLayout>
 </android.support.v7.widget.CardView>
