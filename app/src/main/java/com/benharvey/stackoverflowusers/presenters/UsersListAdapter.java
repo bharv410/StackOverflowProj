@@ -46,14 +46,20 @@ public class UsersListAdapter extends RecyclerView.Adapter<UserListItemViewHolde
         holder.bronzeBadgeTxt.setText(user.getBadgeCount().getBronze());
 
         loadProfileImage(holder, user);
+        setAge(holder, user);
+        setLocation(holder, user);
+    }
 
+    private void setAge(final UserListItemViewHolder holder, final User user){
         //some ages are null
         if(user.getAge() != null) {
             holder.userAgeTxt.setText(c.getString(R.string.user_age_text, user.getAge()));
         }else{
             holder.userAgeTxt.setText(c.getString(R.string.user_age_text_not_available));
         }
+    }
 
+    private void setLocation(final UserListItemViewHolder holder, final User user){
         //some locations are null or unparsable
         if(user.getLocation() != null
                 && !user.getLocation().contains("#")) {
